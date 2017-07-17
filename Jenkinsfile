@@ -12,6 +12,8 @@ node {
       stage('build') {
         try {
           sh "date"
+          sh "echo ${env.JOB_NAME}"
+          sh "echo ${env.BRANCH_NAME}"
         
         } finally {
           sh "echo test"
