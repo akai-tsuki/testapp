@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/labstack/echo"
 )
@@ -21,8 +23,13 @@ func show(c echo.Context) error {
 
 	count++
 	cntStr := strconv.Itoa(count)
+	header := c.Request().Header
+	// fmt.Println(header.Get("user-agent"))
+	headers := fmt.Sprintf("%#v", header)
 
-	return c.String(http.StatusOK, "Hello, World! id: "+id+", count: "+cntStr)
+	output := strings.Replace(headers, ", ", ", \n", -1)
+
+	return c.String(http.StatusOK, "Hello, World! id: "+id+", count: "+cntStr+"\n"+output)
 
 	//	sum := 0
 	//	for i := 0; i < 5; i++ {
