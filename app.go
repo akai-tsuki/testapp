@@ -7,6 +7,8 @@ import (
 	"github.com/labstack/echo"
 )
 
+var count int
+
 func main() {
 	e := echo.New()
 	e.GET("/server/:id", show)
@@ -15,15 +17,20 @@ func main() {
 
 func show(c echo.Context) error {
 
-	sum := 0
-	for i := 0; i < 5; i++ {
-		sum += i
-
-	}
-
 	id := c.Param("id")
 
-	sums := strconv.Itoa(sum)
+	count++
+	cntStr := strconv.Itoa(count)
 
-	return c.String(http.StatusOK, "Hello, World!"+id+sums)
+	return c.String(http.StatusOK, "Hello, World! id: "+id+", count: "+cntStr)
+
+	//	sum := 0
+	//	for i := 0; i < 5; i++ {
+	//		sum += i
+	//
+	//	}
+
+	//	sums := strconv.Itoa(sum)
+
+	//	return c.String(http.StatusOK, "Hello, World!"+id+sums)
 }
